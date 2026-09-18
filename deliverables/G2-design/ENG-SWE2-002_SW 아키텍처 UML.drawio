@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-09-18T00:00:00.000Z" agent="architecture-designer" version="24.7.17" type="device" copyright="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요">
+  <diagram id="eng-swe2-002" name="Page-1">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="ENG-SWE2-002_SW 아키텍처 UML — 전자식 차일드락 제어 SW (후보 C: 포트-어댑터 + 마이크로커널/플러그인)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1200" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="boundary" value="SW 시스템 경계 (단일 Python 3.12 프로세스, PC/SIL 참조 구현)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#2F75B5;fillColor=#F5F9FD;fontColor=#595959;fontSize=14;verticalAlign=top;align=left;spacingLeft=10;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="60" width="1150" height="820" as="geometry"/>
+        </mxCell>
+
+        <!-- External actors left -->
+        <mxCell id="actor_vehicle" value="Vehicle&#10;(OEM-IF-001,002,003,007,008,009)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="120" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_driver" value="Driver&#10;(OEM-IF-004)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="220" width="180" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- External actors right -->
+        <mxCell id="actor_actuator" value="Actuator model&#10;(OEM-IF-005)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="140" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_display" value="Display / Web 시뮬레이터&#10;(OEM-IF-006, HTTP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="240" width="170" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Inbound adapters lane -->
+        <mxCell id="lane_in" value="인바운드 어댑터" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#2F75B5;" vertex="1" parent="1">
+          <mxGeometry x="260" y="90" width="220" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp01" value="CMP-01&#10;VehicleSignalAdapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="130" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp02" value="CMP-02&#10;DriverCommandAdapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="230" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp03" value="CMP-03&#10;DisplayHttpAdapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="330" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Domain core box -->
+        <mxCell id="core" value="도메인 코어 (마이크로커널/플러그인)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#BF9000;fillColor=#FFF9E6;fontColor=#7F6000;fontSize=13;verticalAlign=top;align=left;spacingLeft=10;spacingTop=8;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="90" width="580" height="740" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cmp07" value="CMP-07&#10;InputValidationGate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="560" y="130" width="180" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp08" value="CMP-08&#10;FreshnessMonitor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="760" y="130" width="180" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp09" value="CMP-09&#10;SensorFaultGate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="960" y="130" width="140" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cmp11" value="CMP-11 [마이크로커널]&#10;PriorityDecisionEngine&#10;(평가주기 오케스트레이터)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9D9;strokeColor=#B45F06;strokeWidth=3;fontColor=#000000;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="220" width="540" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cmp10" value="CMP-10&#10;StateTransitionManager&#10;(NORMAL/DEGRADED/FAULT/OFF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="560" y="330" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp20" value="CMP-20&#10;StatusQueryService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="840" y="330" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cmp12" value="CMP-12 [레지스트리, OCP 확장점]&#10;PriorityRuleChain&#10;(IPriorityRule 순회, 첫매치우선)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9D9;strokeColor=#B45F06;strokeWidth=3;fontColor=#000000;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="410" width="540" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rules_asilb" value="ASIL B 규칙 플러그인 (DEGRADED 중에도 평가)&#10;CMP-13 CrashReleaseRule (우선순위 1)&#10;CMP-14 ApproachRiskRule (우선순위 2, override 포함)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fillColor=#F8CBAD;strokeColor=#C00000;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="560" y="490" width="260" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="rules_qm" value="QM 규칙 플러그인 (Phase 2/3, DEGRADED 중 미평가*)&#10;CMP-15 FireOvertempAdultRule (3)&#10;CMP-16 IsofixRule (4)&#10;CMP-17 IgnitionOffRule (5)*state=OFF 예외&#10;CMP-18 VehicleSpeedLockRule (6)&#10;CMP-19 DriverCommandRule (7,최하)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fillColor=#DDEBF7;strokeColor=#2F75B5;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="490" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ext_note" value="확장점: 신규 IPriorityRule 구현체를 CMP-12에 등록만 하면&#10;기존 컴포넌트 변경 없이 규칙 추가 가능 (OCP)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fillColor=#FFF2CC;strokeColor=#BF9000;fontColor=#000000;fontSize=11;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="630" width="540" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Outbound adapters lane -->
+        <mxCell id="lane_out" value="아웃바운드 어댑터" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#2F75B5;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="90" width="220" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp04" value="CMP-04&#10;ActuatorModelAdapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="130" width="220" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp05" value="CMP-05&#10;SimulatedClockAdapter (ClockPort)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="200" width="220" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp06" value="CMP-06&#10;DecisionLogStore (최근 100건)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="270" width="220" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="cmp21" value="CMP-21&#10;Bootstrap / CompositionRoot&#10;(전체 조립, 요구사항 비보유 인프라)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#7F7F7F;strokeWidth=2;fontColor=#000000;fontSize=11;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="700" width="220" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges: external actors to inbound adapters -->
+        <mxCell id="e1" value="OEM-IF-001,002,003,007,008,009" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="actor_vehicle" target="cmp01">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="OEM-IF-004" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="actor_driver" target="cmp02">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="OEM-IF-006 (HTTP)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="actor_display" target="cmp03">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges: inbound adapters to core -->
+        <mxCell id="e4" value="IF-INT-01 submit_vehicle_snapshot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp01" target="cmp07">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="IF-INT-02 submit_driver_command" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp02" target="cmp11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="IF-INT-03 get_status()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp03" target="cmp20">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges: gates into orchestrator -->
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="cmp07" target="cmp11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="cmp08" target="cmp11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="cmp09" target="cmp11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="IF-INT-05 ClockPort.now_s()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp08" target="cmp05">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Orchestrator to state manager / rule chain / status -->
+        <mxCell id="e11" value="IF-INT-08 notify/get_state" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp11" target="cmp10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" value="evaluate_all(ctx)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp11" target="cmp12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e13" value="IF-INT-08 get_state (읽기, DEGRADED 필터)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;dashed=1;" edge="1" parent="1" source="cmp12" target="cmp10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e14" value="IF-INT-07 IPriorityRule.evaluate()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp12" target="rules_asilb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e15" value="IF-INT-07 IPriorityRule.evaluate()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp12" target="rules_qm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="cmp10" target="cmp20">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="cmp11" target="cmp20">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Orchestrator to outbound adapters -->
+        <mxCell id="e18" value="IF-INT-04 set_outputs()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp11" target="cmp04">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e19" value="IF-INT-06 log_decision()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp11" target="cmp06">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e20" value="OEM-IF-005" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;" edge="1" parent="1" source="cmp04" target="actor_actuator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="guide" value="작성 안내(요약)&lt;br&gt;1. 인바운드/아웃바운드 어댑터가 9개 외부 인터페이스(OEM-IF-001~009)를 격리&lt;br&gt;2. 도메인 코어는 어댑터 구체 타입을 모름(DIP), 모든 통신은 IF-INT-01~08 포트로만&lt;br&gt;3. CMP-12는 IPriorityRule 추상에만 의존(OCP 확장점), 규칙 등록은 CMP-21이 수행&lt;br&gt;4. 요구사항 할당(SWR-001~021, 019제외)은 ENG-SWE2-001 §12, 상세 인터페이스 계약은 §6 참조" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=12;fillColor=#FFF2CC;strokeColor=#BF9000;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="20" y="340" width="200" height="180" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="footer" value="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="230" y="890" width="1150" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
