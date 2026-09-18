@@ -119,7 +119,7 @@ description: ISO 26262와 Automotive SPICE(A-SPICE) 4.1 기준을 준수하는 �
 1. **ID 체계**: `REQ-<레벨>-<일련번호>` (레벨: SYS/SW/HW), 안전요구사항은 `REQ-SYS-SG-xxxx`처럼 안전목표 연계를 표기.
 2. **상향 추적(Upstream)**: 각 요구사항의 `출처(Source)` 필드에 상위 요구사항/이해관계자요구/안전목표 ID를 기록.
 3. **하향 추적(Downstream)**: 설계 문서, 코드 모듈, 테스트 케이스가 요구사항 ID를 명시적으로 인용(`Satisfies: REQ-SW-0001`, `Verifies: REQ-SW-0001`)하도록 규정.
-4. **추적 매트릭스**: `docs/requirements/traceability_matrix.md`(또는 프로젝트 지정 경로)에 요구사항×설계×테스트 매핑 표를 유지하고, 요구사항이 추가/변경/삭제될 때마다 갱신한다.
+4. **추적 매트릭스**: 조직 표준 템플릿 `WP_Templates/Engineering/Traceability/TPL-TRC-001_양방향 요구사항 추적 매트릭스 템플릿.xlsx`(적용 산출물 ID `ENG-TRC-001`, 열: Upper Req/SW Req/Architecture/Detailed Design/Code/SWE.4/SWE.5/SWE.6/Coverage)를 사용한다. 이 파일은 요구사항 분석 단계에서 한 번 생성되고, 이후 모든 단계(아키텍처/상세설계/구현/통합시험/시스템시험)의 서브에이전트가 해당 컬럼을 채워 넣으며 계속 확장한다 — 요구사항이 추가/변경/삭제될 때마다 갱신한다.
 5. **SysML Requirement Diagram**: §2의 관계(`«satisfy»`, `«verify»`, `«derive»`, `«refine»`, `«trace»`)로 추적 매트릭스를 시각적으로도 표현한다.
 6. **고아 요구사항(Orphan) 점검**: 상위/하위 링크가 없는 요구사항은 결함으로 표시하고 보고한다.
 7. 이 방안은 문서 작성 시점뿐 아니라 이후 산출물(설계/테스트) 생성·수정 시에도 지속적으로 유지해야 한다 — 요구사항을 다루는 모든 작업에서 추적 매트릭스 갱신을 마지막 단계로 포함한다.
