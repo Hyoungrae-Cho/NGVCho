@@ -1,0 +1,62 @@
+@startuml AC-01_SW결정우선순위평가흐름
+title AC-01 SW 결정 우선순위 평가 흐름 (1 평가주기)\n관련: SWR-003,005,006,007,008,009,013,017,018,020,021
+
+start
+
+:입력 스냅샷 수신\n(vehicle_speed_kph, gear, crash_status,\napproach_risk, fire/overtemp/adult,\nisofix, ignition_on, sensor_fault, driver cmd);
+
+if (형식/범위 오류 또는 freshness>200ms? [SWR-013]) then (yes)
+  :해당 입력 INVALID 처리;
+  :DEGRADED 상태 전이(100ms 이내) [SWR-013];
+endif
+
+if (sensor_fault == TRUE? [SWR-021]) then (yes)
+  :신규 명령 미적용,\n직전 확정 출력 유지;
+  :state = FAULT, warning code 기록;
+  stop
+else (no)
+endif
+
+if (crash_status == CONFIRMED? [SWR-007,008]) then (yes)
+  :좌우 출력 = RELEASE (300ms 이내, 최우선);
+  :이후 주기도 RELEASE 유지 [SWR-008];
+  stop
+else (no)
+endif
+
+if (해당 도어 approach_risk == TRUE? [SWR-005,009]) then (yes)
+  :해당 출력 = LOCK;
+  if (10초 이하 재입력 override? [SWR-006]) then (yes)
+    :override 처리, 해당 출력 = RELEASE,\noverride 이유코드 기록;
+  else (no)
+    :RELEASE 요청 억제,\n억제 이유코드 기록 [SWR-009];
+  endif
+else (no)
+endif
+
+if (fire_detected OR overtemperature_detected OR adult_present? [SWR-017]) then (yes)
+  :좌우 출력 = RELEASE,\n입력별 이유코드 기록;
+endif
+
+if (isofix_left/right == TRUE? [SWR-018]) then (yes)
+  :해당 side 출력 = LOCK,\n반대편은 유지;
+endif
+
+if (ignition_on == FALSE? [SWR-020]) then (yes)
+  :좌우 출력 = RELEASE,\nstate = OFF, reason=ignition_off;
+  stop
+else (no)
+endif
+
+if (vehicle_speed_kph >= 3.0 km/h? [SWR-003]) then (yes)
+  :좌우 출력 = LOCK;
+endif
+
+if (유효한 운전자 명령 수신? [SWR-001,002,004]) then (yes)
+  :명령 대상 side에만 action 적용;
+endif
+
+:공개 결과(출력, state, reason_code) 확정;
+stop
+
+@enduml
