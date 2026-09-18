@@ -30,18 +30,20 @@ GitHub 저장소의 Settings → Branches에서 `main`에 아래 규칙을 적�
 
 ### `gh` CLI로 한 번에 적용하기
 
+**이 저장소에는 이미 적용되어 있다** (2026-09-18, `gh` 설치·인증 후 아래 명령으로 실행 완료). 다른 저장소에 동일 정책을 적용할 때 참고한다. 중첩 필드는 `key[subkey]=value` 형식을 쓰며(`key.subkey=value`는 422 오류가 난다), 문자열이 아닌 값(`true`/`false`/`null`/숫자)은 `-F`를 사용한다.
+
 ```bash
 gh auth login   # 최초 1회, 저장소에 대한 admin 권한 필요
 gh api -X PUT repos/Hyoungrae-Cho/NGVCho/branches/main/protection \
   -H "Accept: application/vnd.github+json" \
-  -f required_status_checks.strict=true \
-  -f 'required_status_checks.checks[][context]=CI / quality-gates' \
-  -f enforce_admins=true \
-  -f required_pull_request_reviews.required_approving_review_count=0 \
-  -f restrictions=null \
-  -f allow_force_pushes=false \
-  -f allow_deletions=false \
-  -f required_conversation_resolution=true
+  -F "required_status_checks[strict]=true" \
+  -f "required_status_checks[checks][][context]=CI / quality-gates" \
+  -F "enforce_admins=true" \
+  -F "required_pull_request_reviews[required_approving_review_count]=0" \
+  -F "restrictions=null" \
+  -F "allow_force_pushes=false" \
+  -F "allow_deletions=false" \
+  -F "required_conversation_resolution=true"
 ```
 
 ## CI가 검사하는 항목 (`CLAUDE.md` 구현/테스트 지침 근거)

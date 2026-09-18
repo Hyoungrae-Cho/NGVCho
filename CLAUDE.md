@@ -55,7 +55,8 @@
 
 ### 시스템 테스트 지침
 
-- 시스템 테스트는 sw-system-tester 가 수행한다.
+- 시스템 테스트 케이스 설계는 sw-system-tester 가 수행한다.
+- 시스템 테스트의 실행과 Pass/Fail 판정은 Coding 서브에이전트가 수행한다.
 - 테스트 성공률은 100%여야 한다.
 
 ### 서브에이전트·스킬 구성 원칙
@@ -71,7 +72,8 @@
 | 구현 | Coding | implementation, tdd | ISO 26262-6 clause 8, A-SPICE SWE.3, 본 문서 구현 지침 |
 | 단위 테스트(TDD로 대체) | Coding | tdd | A-SPICE SWE.4 |
 | 통합 테스트 | integration-tester | integration-test | ISO 26262-6 clause 10, A-SPICE SWE.5 |
-| 시스템 테스트 | sw-system-tester | sw-system-test | ISO 26262 Part 6, A-SPICE SWE.6, ISO 29119/ISTQB, ISO 25000 |
+| 시스템 테스트(케이스 설계) | sw-system-tester | sw-system-test | ISO 26262 Part 6, A-SPICE SWE.6, ISO 29119/ISTQB, ISO 25000 |
+| 시스템 테스트(실행·판정) | Coding | implementation, tdd | A-SPICE SWE.6 |
 
 - 감사(횡단 역할): `aspice-cl2-auditor`(스킬: `aspice-auditor`)는 위 단계 산출물을 CL2 관점으로 점검하는 별도 역할이며 특정 생명주기 단계에 속하지 않는다.
 - 동일한 표준(예: ISO 25000 품질특성 분류)이 여러 스킬에서 필요한 경우, 최초 정의한 스킬을 그대로 참조하고 다른 스킬에서 재정의하지 않는다.
