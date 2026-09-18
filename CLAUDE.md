@@ -27,7 +27,7 @@
 
 ### 상세 설계 지침
 
-- 상세 설계 단계 수행은 archidetailed-designer 서브에이전트가 담당한다.
+- 상세 설계 단계 수행은 detailed-designer 서브에이전트가 담당한다.
 
 ### 구현 지침
 
