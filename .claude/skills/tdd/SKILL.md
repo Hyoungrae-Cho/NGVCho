@@ -5,7 +5,7 @@ description: Python(unittest) 기반으로 테스트 주도 개발(TDD, Red-Gree
 
 # TDD(Test-Driven Development) 스킬
 
-> 이 스킬은 [obra/superpowers](https://github.com/obra/superpowers) 저장소의 `test-driven-development` 스킬(MIT License, Copyright (c) 2025 Jesse Vincent)의 원칙을 이 프로젝트(Python 3.14/`unittest`, `detailed-design`·`implementation` 스킬)에 맞게 번역·재구성한 것이다. 세부 테스트 작성 원칙은 함께 제공되는 [writing-good-tests.md](writing-good-tests.md)를 참조한다.
+> 이 스킬은 [obra/superpowers](https://github.com/obra/superpowers) 저장소의 `test-driven-development` 스킬(MIT License, Copyright (c) 2025 Jesse Vincent)의 원칙을 이 프로젝트(Python 3.12/`unittest`, `detailed-design`·`implementation` 스킬)에 맞게 번역·재구성한 것이다. 세부 테스트 작성 원칙은 함께 제공되는 [writing-good-tests.md](writing-good-tests.md)를 참조한다.
 
 ## 0. 철칙(Iron Law)
 
