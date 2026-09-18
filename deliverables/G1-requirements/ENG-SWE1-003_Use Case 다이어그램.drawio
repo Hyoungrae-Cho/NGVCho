@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-09-18T00:00:00.000Z" agent="requirements-analyst" version="24.7.17" type="device" copyright="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요">
+  <diagram id="uc-diagram" name="Page-1">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="ENG-SWE1-003 Use Case 다이어그램 — 전자식 차일드락 제어 SW (SWE.1)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1000" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="boundary" value="시스템 경계: 전자식 차일드락 제어 SW (PC/SIL, Python 3.12)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#2F75B5;fillColor=#F5F9FD;fontColor=#595959;fontSize=13;verticalAlign=top;spacingTop=16;" vertex="1" parent="1">
+          <mxGeometry x="300" y="90" width="700" height="620" as="geometry"/>
+        </mxCell>
+
+        <!-- Actors -->
+        <mxCell id="actor_driver" value="운전자&#10;(Driver)" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;fillColor=#D9EAF7;strokeColor=#2F75B5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="40" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_vehicle" value="차량 시스템&#10;(Vehicle / Sensors)&#10;OEM-IF-001~003,007~009" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="420" width="180" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_display" value="표시장치 / Web 시뮬레이터&#10;(Display)&#10;OEM-IF-006" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="200" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_actuator" value="액추에이터 모델&#10;(Actuator model)&#10;OEM-IF-005" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="420" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Use cases -->
+        <mxCell id="uc01" value="UC-01&#10;좌/우/전체 잠금·해제 명령 실행&#10;SWR-001, SWR-002, SWR-004" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="140" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc03" value="UC-03&#10;접근위험 억제 및 10초 이하&#10;재입력 override&#10;SWR-005, SWR-006, SWR-009" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="300" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_safety" value="UC-04(참고)&#10;안전 강제 해제/잠금&#10;(충돌·화재·과온·성인탑승·ISOFIX)&#10;SWR-007,008,017,018,020,021" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="700" y="300" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc02" value="UC-02&#10;잠금 상태·이유코드 조회&#10;SWR-014, SWR-015" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="140" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc_output" value="출력 결정 공개&#10;(모든 UC가 사용)&#10;SWR-002,003,005~009,013,&#10;017,018,020,021" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#BF9000;fontColor=#000000;fontSize=11;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="500" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Relations -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=11;" edge="1" parent="1" source="actor_driver" target="uc01">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=11;" edge="1" parent="1" source="actor_driver" target="uc03">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2b" value="상태조회 요청" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=11;" edge="1" parent="1" source="actor_driver" target="uc02">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="속도/기어/충돌/접근위험/화재/과온/성인탑승/ISOFIX/점화/센서고장" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=10;" edge="1" parent="1" source="actor_vehicle" target="uc03">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=10;" edge="1" parent="1" source="actor_vehicle" target="uc_safety">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;fontSize=10;" edge="1" parent="1" source="uc01" target="uc_output">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;fontSize=10;" edge="1" parent="1" source="uc03" target="uc_output">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;fontSize=10;" edge="1" parent="1" source="uc_safety" target="uc_output">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=11;" edge="1" parent="1" source="uc_output" target="actor_actuator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;fontSize=11;" edge="1" parent="1" source="uc02" target="actor_display">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;fontSize=10;" edge="1" parent="1" source="uc02" target="uc_output">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="guide" value="근거&#10;- 액터: OEM 사양서 §3 입력/표시/조작&#10;- Use Case: SWE1-001 4장 SWR-001,002,004,005,006,009,014,015 (액터 상호작용 중심)&#10;- UC-04는 액터 상호작용이 약해 참고용으로만 표시(요구사항은 4.1/4.2에 상세 기술)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#FFF2CC;strokeColor=#BF9000;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="620" width="220" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="footer" value="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요 | ENG-SWE1-003 v1.0 (BL-SWR-1.0)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="300" y="740" width="700" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
