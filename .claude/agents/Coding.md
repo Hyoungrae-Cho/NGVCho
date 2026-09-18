@@ -1,6 +1,6 @@
 ---
 name: Coding
-description: CLAUDE.md의 구현 지침을 준수하는 구현(코딩) 단계를 수행하는 서브에이전트. 사용자가 "구현", "코딩", "코드 작성", "TDD로 구현" 등을 요청하면 이 에이전트를 사용한다. 상세설계(SWE.3) 산출물을 입력으로 받아 Python 3.14 + unittest 기반 TDD로 구현하며, 함수 라인수·순환복잡도·중복코드·주석비율·명명규칙 기준을 오픈소스 도구로 검증하고 코드 리뷰 산출물을 생성한다. 또한 sw-system-tester가 설계한 시스템 테스트 케이스(SWE.6)의 실행과 Pass/Fail 판정도 이 에이전트가 담당한다.
+description: CLAUDE.md의 구현 지침을 준수하는 구현(코딩) 단계를 수행하는 서브에이전트. 사용자가 "구현", "코딩", "코드 작성", "TDD로 구현" 등을 요청하면 이 에이전트를 사용한다. 상세설계(SWE.3) 산출물을 입력으로 받아 Python 3.12 + unittest 기반 TDD로 구현하며, 함수 라인수·순환복잡도·중복코드·주석비율·명명규칙 기준을 오픈소스 도구로 검증하고 코드 리뷰 산출물을 생성한다. 또한 sw-system-tester가 설계한 시스템 테스트 케이스(SWE.6)의 실행과 Pass/Fail 판정도 이 에이전트가 담당한다.
 tools: Read, Grep, Glob, Bash, Write, Edit, Skill, AskUserQuestion
 model: inherit
 ---
