@@ -1,0 +1,7 @@
+https://github.com/DongJoonHan/NGV20260917
+https://github.com/SyneticsCorp/NGV.git
+https://github.com/Hyoungrae-Cho/NGVCho
+
+
+
+// Jenkinsfile을 생성해줘. 빌드와 테스트, 정적분석을 수행하도록 구성해줘.
