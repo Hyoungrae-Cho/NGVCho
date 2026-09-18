@@ -174,5 +174,6 @@ class SpeedControllerTest(unittest.TestCase):
 - [ ] 경계값과 오류 케이스가 포함되어 있다
 - [ ] 모든 테스트 함수에 `@brief`/`@technique`/`@case` Doxygen 설명이 있다
 - [ ] 변이 검사(§4.3)를 통과한다
+- [ ] 단위 테스트 브랜치 커버리지 100%, 테스트 성공률 100%(Fail 0건)를 도구로 확인했다(`implementation` 스킬 §2, `CLAUDE.md` 단위 테스트 지침)
 
 위 항목을 모두 체크할 수 없다면 TDD를 생략한 것이다 — 다시 시작한다.

@@ -7,18 +7,14 @@ description: CLAUDE.md의 구현 지침(Python 3.14, TDD, 함수 라인수/순�
 
 이 스킬은 `CLAUDE.md`의 구현 지침과 ISO 26262-6:2018 clause 8(소프트웨어 유닛 구현), A-SPICE 4.1 SWE.3(Unit Construction 관점)을 만족하는 코드 작성 방법을 규정한다. 구현은 상세설계(`detailed-design` 스킬, SWE.3) 산출물을 입력으로 받아 Python 3.14 소스코드와 `unittest` 기반 테스트로 실현하는 단계다.
 
-## 0. 선행 조건 및 산출물 원칙
+## 0. 선행 산출물과 산출물 규칙 (방법론 — 존재 확인·사용자 확인은 에이전트 책임)
 
-- 본 프로젝트는 **분석 → 설계 → 구현 → 테스트** 순서를 반드시 준수한다(`CLAUDE.md`). 구현에 착수하기 전에 대상 유닛의 상세설계 산출물(함수/모듈 계약, 공통 자료형, 알고리즘/결정표/상태전이)이 존재하는지 `Glob`/`Grep`으로 확인한다.
-  - 존재하지 않으면 구현을 임의로 진행하지 말고, 사용자에게 상세설계 선행 여부 또는 산출물 위치를 확인한다.
-- **구현은 반드시 `tdd` 스킬의 Red-Green-Refactor 절차로 진행한다.** 실패하는 테스트 없이 프로덕션 코드를 작성하지 않는다.
-- 구현 단계가 완료되었을 때 생성/갱신해야 하는 산출물:
-  - 소스코드(Python 3.14)와 `unittest` 테스트 코드
-  - 품질 지표 측정 리포트(§3)
-  - 코드 리뷰/인스펙션 결과: `WP_Templates/Engineering/QualityReview/TPL-REV-001_단계별 인스펙션 결과 템플릿.xlsx` (Common/SUP.1, 모든 단계 공통 템플릿)
-  - 신규 외부/OSS 라이브러리를 도입했다면 `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SBOM-001_Python 의존성 SBOM FOSS 라이선스 목록 템플릿.xlsx` 갱신
-  - 추적 매트릭스 갱신(§8)
-- `.xlsx` 산출물은 `anthropic-skills:xlsx` 스킬로 기존 시트/열 구조를 유지한 채 작성한다. 파일명은 `WP_Templates/Engineering/README.md` 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 따른다.
+이 스킬은 "무엇이 입력이고 무엇을 만들어야 하는가"만 정의한다. 저장소에 실제로 있는지 확인하고 없을 때 사용자에게 묻는 절차, 그리고 `tdd` 스킬을 이용한 Red-Green-Refactor 실행 자체는 `Coding` 에이전트의 실행 절차가 전담한다.
+
+- **선행 산출물**: 대상 유닛의 상세설계(SWE.3) 산출물 — 함수/모듈 계약, 공통 자료형, 알고리즘/결정표/상태전이. 본 프로젝트는 분석 → 설계 → 구현 → 테스트 순서를 반드시 준수한다(`CLAUDE.md`).
+- **구현 방법**: 반드시 `tdd` 스킬의 Red-Green-Refactor 절차를 적용한다(방법론 자체는 `tdd` 스킬이 정의하며 이 스킬은 재정의하지 않는다). 실패하는 테스트 없이 프로덕션 코드를 작성하지 않는다.
+- **완료 시 산출물**: 소스코드(Python 3.14)·`unittest` 테스트 코드, 품질 지표 측정 리포트(§3), 코드 리뷰/인스펙션 결과(`TPL-REV-001`, Common/SUP.1), 신규 외부/OSS 라이브러리 도입 시 `TPL-SBOM-001` 갱신, 추적 매트릭스 갱신(§8).
+- **산출물 형식 규칙**: `.xlsx` 산출물은 `anthropic-skills:xlsx` 스킬로 기존 시트/열 구조를 유지한 채 작성한다. 파일명은 `WP_Templates/Engineering/README.md` 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 따른다.
 
 ## 1. 개발 환경
 
@@ -35,6 +31,8 @@ description: CLAUDE.md의 구현 지침(Python 3.14, TDD, 함수 라인수/순�
 | 중복 코드 | 최대 7라인까지 허용, 8라인 이상 동일/유사 코드 중복은 결함 |
 | 주석 비율 | Doxygen 방식으로 작성하며, 전체 라인 중 20% 이상 |
 | 명명규칙 | 함수명·변수명은 3글자 이상, **camelCase**(이 프로젝트는 PEP 8의 snake_case 대신 camelCase를 명시적으로 채택함 — `CLAUDE.md` 명시 지침) |
+| 단위 테스트 브랜치 커버리지 | `unittest` 실행 기준 100%(`CLAUDE.md` 단위 테스트 지침) |
+| 단위 테스트 성공률 | 100%(Fail 0건, `CLAUDE.md` 단위 테스트 지침) — 실패한 테스트를 남겨둔 채 완료로 보고하지 않는다 |
 
 지표를 위반한 상태로 해당 유닛의 구현을 완료로 보고하지 않는다. `tdd` 스킬 §3(Refactor)에서 반드시 해소한다.
 
@@ -46,7 +44,7 @@ description: CLAUDE.md의 구현 지침(Python 3.14, TDD, 함수 라인수/순�
 | 함수/모듈 라인수, 주석 비율 | `radon raw <경로>` | LOC/SLOC/Comments/Multi(독스트링)를 확인하여 `(Comments + Multi) / LOC ≥ 0.2` 계산 |
 | 정적분석/스타일 | `flake8`(+`mccabe` 플러그인) 또는 `pylint` | 기본 스타일 검사. **`pep8-naming` 플러그인은 snake_case를 강제하므로 이 프로젝트에는 그대로 적용하지 않는다.** camelCase·3글자 이상 규칙은 별도 정규식 검사 스크립트 또는 커스텀 pylint 체커로 검증한다(예: 함수/파라미터/지역변수명이 `^[a-z][a-zA-Z0-9]{2,}$` 패턴인지 확인) |
 | 중복 코드 | `pylint`의 `duplicate-code`(symilar) 검사, 또는 `jscpd` | 7라인 초과 중복 블록 탐지 |
-| 테스트 커버리지 | `coverage run -m unittest` + `coverage report` | TDD로 작성된 테스트의 커버리지를 참고 지표로 확인(품질 지표는 아니지만 리뷰 근거로 활용) |
+| 브랜치 커버리지·테스트 성공률 | `coverage run --branch -m unittest discover` + `coverage report` | 브랜치 커버리지 100%, 실행된 테스트 전체 Pass(Fail 0건)를 확인. 미달 시 §2 위반으로 처리 |
 
 모든 지표는 `Bash`로 실제 도구를 실행한 측정값을 근거로 보고한다. 도구가 설치되어 있지 않으면 임의로 통과 처리하지 말고 사용자에게 설치 여부를 확인한다.
 

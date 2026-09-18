@@ -7,16 +7,15 @@ description: ISO 26262-6과 Automotive SPICE(A-SPICE) 4.1(SWE.2/SYS.3) 기준을
 
 이 스킬은 ISO 26262-6:2018 clause 7(소프트웨어 아키텍처 설계)과 Automotive SPICE 4.1 SWE.2(소프트웨어 아키텍처 설계)/SYS.3(시스템 아키텍처 설계)를 동시에 만족하는 아키텍처를 설계·평가·문서화하기 위한 방법론을 정의한다.
 
-## 0. 선행 조건 및 템플릿 우선 원칙
+## 0. 선행 산출물과 적용 템플릿 (방법론 — 존재 확인·사용자 확인은 에이전트 책임)
 
-- 본 프로젝트는 **분석 → 설계 → 구현 → 테스트** 순서를 반드시 준수한다(`CLAUDE.md`). 아키텍처 설계(설계 단계) 착수 전에 선행 단계인 요구사항 분석(SYS.2/SWE.1) 산출물이 존재하는지 `Glob`/`Grep`으로 확인한다. 존재하지 않으면 아키텍처를 임의로 설계하지 말고, 사용자에게 요구사항 분석 선행 여부를 확인하거나 산출물 위치를 질문한다.
-- 아키텍처 설계서는 **저장소에 이미 존재하는 조직 표준 템플릿을 최우선으로 준수**한다.
-  - 문서 템플릿: `WP_Templates/Engineering/SoftwareArchitecturalDesign/TPL-SWE2-001_SW 아키텍처 설계서 템플릿.docx`
-  - UML 다이어그램 템플릿: `WP_Templates/Engineering/SoftwareArchitecturalDesign/TPL-SWE2-002_SW 아키텍처 UML 템플릿.drawio`
-- 작업 시작 시 `Glob`으로 위 템플릿이 실제로 존재하는지 재확인한다. 템플릿의 장/절 구조가 §8의 매핑표와 다르면 매핑표를 갱신하고, 템플릿을 찾을 수 없으면 임의로 목차를 만들지 말고 사용자에게 확인한다.
-- `.docx` 산출물을 새로 만들거나 수정할 때는 `anthropic-skills:docx` 스킬을 함께 로드하여 템플릿의 장/절 구조·서식·문서통제(변경이력, 작성/검토/승인 상태)를 그대로 유지한다.
-- `.drawio` 다이어그램은 TPL-SWE2-002의 스타일(설계 경계, 액터, 요소, 관계, 작성 안내 상자, 푸터)을 그대로 확장하여 작성한다. 안내용 예시 도형은 실제 요소로 교체한다.
-- 파일명은 `WP_Templates/Engineering/README.md` 규칙에 따라 `<산출물 ID>_<산출물명>.<확장자>`로 정한다. 필요 시 실제 산출물 위치를 `PRC-TPL-001_표준 산출물 양식 등록부.xlsx`에 기록한다.
+이 스킬은 "무엇이 입력이고 무엇을 준수해야 하는가"만 정의한다. 이것이 실제로 저장소에 있는지 확인하고, 없을 때 사용자에게 묻는 절차는 이 스킬을 사용하는 `architecture-designer` 에이전트의 실행 절차(해당 에이전트 정의의 필수 절차 2~3단계)가 전담한다 — 이 스킬 안에서 `Glob`/`Grep` 같은 확인 절차를 반복 규정하지 않는다.
+
+- **선행 산출물**: 요구사항 분석(SYS.2/SWE.1) 산출물. 본 프로젝트는 분석 → 설계 → 구현 → 테스트 순서를 반드시 준수한다(`CLAUDE.md`).
+- **적용 템플릿**(저장소의 조직 표준 양식, 최우선 준수):
+  - 문서: `WP_Templates/Engineering/SoftwareArchitecturalDesign/TPL-SWE2-001_SW 아키텍처 설계서 템플릿.docx` — 장 구조는 §8 매핑표를 따른다.
+  - UML: `WP_Templates/Engineering/SoftwareArchitecturalDesign/TPL-SWE2-002_SW 아키텍처 UML 템플릿.drawio` — 스타일(설계 경계, 액터, 요소, 관계, 작성 안내 상자, 푸터)을 그대로 확장한다.
+- **산출물 형식 규칙**: `.docx`는 `anthropic-skills:docx` 스킬로 템플릿의 장/절 구조·서식·문서통제를 유지해 작성하고, `.drawio`는 TPL-SWE2-002 스타일을 확장한다(안내용 예시 도형은 실제 요소로 교체). 파일명은 `WP_Templates/Engineering/README.md` 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 따르며, 필요 시 실제 위치를 `PRC-TPL-001_표준 산출물 양식 등록부.xlsx`에 기록한다.
 
 ## 1. 아키텍처 설계 원칙 (ISO 26262-6 clause 7 / A-SPICE SWE.2, SYS.3)
 

@@ -7,18 +7,16 @@ description: ISO 26262-6과 Automotive SPICE(A-SPICE) 4.1 SWE.3 기준을 준수
 
 이 스킬은 ISO 26262-6:2018 clause 8(소프트웨어 유닛 설계 및 구현)과 Automotive SPICE 4.1 SWE.3(소프트웨어 상세설계)를 동시에 만족하는 상세설계를 작성·평가·문서화하기 위한 방법론을 정의한다. 상세설계는 아키텍처 설계(`architecture-design` 스킬, SWE.2)의 컴포넌트/인터페이스를 구현 가능한 수준까지 세분화하는 단계다.
 
-## 0. 선행 조건 및 템플릿 우선 원칙
+## 0. 선행 산출물과 적용 템플릿 (방법론 — 존재 확인·사용자 확인은 에이전트 책임)
 
-- 본 프로젝트는 **분석 → 설계 → 구현 → 테스트** 순서를 반드시 준수한다(`CLAUDE.md`). 상세설계에 착수하기 전에 선행 산출물인 소프트웨어 아키텍처 설계서(SWE.2, 예: `TPL-SWE2-001` 기반 문서와 인터페이스 명세)가 존재하는지 `Glob`/`Grep`으로 확인한다.
-  - 존재하지 않으면 상세설계를 임의로 진행하지 말고, 사용자에게 아키텍처 설계 선행 여부 또는 산출물 위치를 확인한다.
-  - 존재하면 아키텍처 요소·인터페이스·요구사항 할당 결과를 상세설계의 입력으로 사용한다.
-- 상세설계서는 **저장소에 이미 존재하는 조직 표준 템플릿을 최우선으로 준수**한다.
-  - 문서 템플릿: `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SWE3-001_SW 상세설계서 템플릿.docx`
-  - UML/호출관계 템플릿: `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SWE3-002_상세설계 UML 및 호출관계 템플릿.drawio`
+이 스킬은 "무엇이 입력이고 무엇을 준수해야 하는가"만 정의한다. 저장소에 실제로 있는지 확인하고 없을 때 사용자에게 묻는 절차는 `detailed-designer` 에이전트의 실행 절차가 전담한다.
+
+- **선행 산출물**: 소프트웨어 아키텍처 설계서(SWE.2) — 아키텍처 요소, 인터페이스 명세, 요구사항 할당 결과. 본 프로젝트는 분석 → 설계 → 구현 → 테스트 순서를 반드시 준수한다(`CLAUDE.md`).
+- **적용 템플릿**(저장소의 조직 표준 양식, 최우선 준수):
+  - 문서: `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SWE3-001_SW 상세설계서 템플릿.docx` — 장 구조는 §12 매핑표를 따른다.
+  - UML/호출관계: `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SWE3-002_상세설계 UML 및 호출관계 템플릿.drawio`
   - 외부/OSS 의존성 목록: `WP_Templates/Engineering/SoftwareDetailedDesignAndUnitConstruction/TPL-SBOM-001_Python 의존성 SBOM FOSS 라이선스 목록 템플릿.xlsx` (SWE.3/SUP.8, 신규 외부 라이브러리 도입 시 필수)
-- 작업 시작 시 `Glob`으로 위 템플릿의 실제 존재/경로를 재확인한다. 템플릿을 찾을 수 없으면 임의로 목차를 만들지 말고 사용자에게 확인한다.
-- `.docx` 산출물을 새로 만들거나 수정할 때는 `anthropic-skills:docx` 스킬을 함께 로드하여 템플릿 구조·서식을 유지한다. `.xlsx`(SBOM) 산출물은 `anthropic-skills:xlsx` 스킬로 기존 시트/열 구조를 유지한 채 실제 데이터 행부터 채운다.
-- 파일명은 `WP_Templates/Engineering/README.md` 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 따른다.
+- **산출물 형식 규칙**: `.docx`는 `anthropic-skills:docx`, `.xlsx`(SBOM)는 `anthropic-skills:xlsx`로 기존 구조를 유지한 채 작성한다. 파일명은 `WP_Templates/Engineering/README.md` 규칙(`<산출물 ID>_<산출물명>.<확장자>`)을 따른다.
 
 ## 1. 상세설계 원칙 (ISO 26262-6 clause 8 / A-SPICE SWE.3)
 

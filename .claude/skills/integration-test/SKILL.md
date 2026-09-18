@@ -7,19 +7,20 @@ description: ISO 26262-6과 Automotive SPICE(A-SPICE) 4.1 SWE.5 기준을 준수
 
 이 스킬은 ISO 26262-6:2018 clause 10(소프트웨어 통합 시험)과 Automotive SPICE 4.1 SWE.5(소프트웨어 통합 및 통합시험)를 동시에 만족하는 통합시험을 설계·실행·문서화하기 위한 방법론을 정의한다. 통합시험의 **시험 베이시스는 아키텍처 설계서(SWE.2)의 인터페이스 명세와 통합 순서**이며, 상세설계(SWE.3)의 호출관계를 커버리지 모집단으로 함께 사용한다.
 
-## 0. 선행 조건 및 템플릿 우선 원칙
+## 0. 선행 산출물과 적용 템플릿 (방법론 — 존재 확인·사용자 확인은 에이전트 책임)
 
-- 본 프로젝트는 **분석 → 설계 → 구현 → 테스트** 순서를 반드시 준수한다(`CLAUDE.md`). 통합시험에 착수하기 전에 다음이 존재하는지 `Glob`/`Grep`으로 확인한다.
-  - 아키텍처 설계 산출물(SWE.2): 특히 **인터페이스 명세(TPL-SWE2-001 §6)**와 **통합 전략/순서(§11)** — 이것이 이 스킬의 시험 베이시스다.
-  - 상세설계 산출물(SWE.3): 모듈 분해·호출관계(TPL-SWE3-001 §2, §3) — 호출 커버리지 모집단 산정에 사용.
-  - 구현(Coding) 산출물: 통합 대상 유닛의 소스코드와 단위시험이 완료되어 있는지.
-  - 위 산출물이 없으면 통합시험을 임의로 설계하지 말고, 사용자에게 선행 단계 완료 여부 또는 산출물 위치를 확인한다.
-- 통합시험 산출물은 **저장소에 이미 존재하는 조직 표준 템플릿을 최우선으로 준수**한다.
+이 스킬은 "무엇이 입력이고 무엇을 준수해야 하는가"만 정의한다. 저장소에 실제로 있는지 확인하고 없을 때 사용자에게 묻는 절차는 `integration-tester` 에이전트의 실행 절차가 전담한다.
+
+- **선행 산출물**: 본 프로젝트는 분석 → 설계 → 구현 → 테스트 순서를 반드시 준수한다(`CLAUDE.md`).
+  - 아키텍처 설계 산출물(SWE.2) — 특히 **인터페이스 명세(TPL-SWE2-001 §6)**와 **통합 전략/순서(§11)**: 이 스킬의 시험 베이시스(§3).
+  - 상세설계 산출물(SWE.3) — 모듈 분해·호출관계(TPL-SWE3-001 §2, §3): 호출 커버리지 모집단 산정에 사용.
+  - 구현(Coding) 산출물 — 통합 대상 유닛의 소스코드와 단위시험 완료.
+- **적용 템플릿**(저장소의 조직 표준 양식, 최우선 준수):
   - 통합전략/시험명세서: `WP_Templates/Engineering/SoftwareComponentVerificationAndIntegrationVerification/TPL-SWE5-001_SW 통합전략 및 통합시험 명세서 템플릿.docx`
   - 통합시험 케이스: `WP_Templates/Engineering/SoftwareComponentVerificationAndIntegrationVerification/TPL-SWE5-002_SW 통합시험 케이스 템플릿.xlsx` (열: Test ID, Trace, Integration Item, Stimulus, Expected Result, Technique, Automation)
   - 통합시험 결과서: `WP_Templates/Engineering/SoftwareComponentVerificationAndIntegrationVerification/TPL-SWE5-003_SW 통합시험 결과서 템플릿.xlsx` (열: Test ID, Trace, Result, Actual Result, Evidence Locator, Defect ID, Disposition / Run Summary 시트)
   - 코드 리뷰/인스펙션이 필요하면 공통 템플릿 `TPL-REV-001`(Common/SUP.1)을 사용한다.
-- `.docx`는 `anthropic-skills:docx`, `.xlsx`는 `anthropic-skills:xlsx` 스킬로 기존 구조를 유지한 채 작성한다. 파일명은 `WP_Templates/Engineering/README.md` 규칙을 따른다.
+- **산출물 형식 규칙**: `.docx`는 `anthropic-skills:docx`, `.xlsx`는 `anthropic-skills:xlsx` 스킬로 기존 구조를 유지한 채 작성한다. 파일명은 `WP_Templates/Engineering/README.md` 규칙을 따른다.
 
 ## 1. ISO 26262-6 clause 10 시험 기법 — **필수 적용**
 
@@ -78,7 +79,7 @@ ISO 26262-6 clause 10의 소프트웨어 통합시험 수준 구조적 커버리
 ## 5. 진입/종료 기준, 환경 및 형상 (템플릿 §4, §5)
 
 - **진입 기준**: 통합 대상 유닛의 구현·단위시험이 완료(Coding 산출물)되어 있고, §3에서 요구된 스텁/드라이버가 준비되어 있다.
-- **종료 기준**: 해당 통합 단계에 계획된 시험 케이스가 모두 실행되었고, §2의 함수/호출 커버리지가 100%(또는 승인된 예외 포함 100%)이며, 발견된 결함이 처리(수정/재시험 또는 승인된 이월)되었다.
+- **종료 기준**: 해당 통합 단계에 계획된 시험 케이스가 모두 실행되어 **테스트 성공률 100%(Fail 0건)**를 달성했고(`CLAUDE.md` 통합 테스트 지침), §2의 함수/호출 커버리지가 100%(또는 승인된 예외 포함 100%)다. 실패한 시험은 코드/설계를 수정해 재시험으로 통과시키며, 실패를 승인된 이월 상태로 남겨둔 채 종료하지 않는다.
 - 환경/형상: 시험 도구, 실행 환경, 소프트웨어 버전, 시험 데이터, 형상 식별 방법을 명시한다.
 
 ## 6. 회귀 전략, 실패/편차 처리 (템플릿 §9, §10)
